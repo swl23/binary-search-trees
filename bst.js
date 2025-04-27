@@ -103,6 +103,32 @@ class Tree {
             }
         }
     }
+
+    find(value, root = this.root) {
+        if (root === null) {
+            console.log("Not found");
+            return;
+        }
+        if (value < root.data) {
+            if (!root.left) {
+                console.log("Not found");
+                return;
+            } else {
+                this.find(value, root.left);
+            }
+        } else if (value > root.data) {
+            if (!root.right) {
+                console.log("Not found");
+                return;
+            } else {
+                this.find(value, root.right);
+            }
+        } else {
+            console.log("FOUND");
+            console.log(root);
+            return root;
+        }
+    }
 }
 
 function buildTree(array) {
