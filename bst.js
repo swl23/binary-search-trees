@@ -29,14 +29,12 @@ class Tree {
             if (value < node.data) {
                 if (node.left === null) {
                     node.left = new Node(value);
-                    console.log("Went left");
                 } else {
                     compare(node.left, value);
                 }
             } else {
                 if (node.right === null) {
                     node.right = new Node(value);
-                    console.log("Went right");
                 } else {
                     compare(node.right, value);
                 }
@@ -59,7 +57,6 @@ class Tree {
             const right = root.right;
             // leaf node
             if (left === null && right === null) {
-                console.log("Leaf node");
                 if (value < parentNode.data) {
                     parentNode.left = null;
                 } else if (value > parentNode.data) {
@@ -70,7 +67,6 @@ class Tree {
 
             // one child
             if ((left && right === null) || (left === null && right)) {
-                console.log("One child");
                 if (value < parentNode.data) {
                     if (left) {
                         parentNode.left = left;
@@ -88,27 +84,21 @@ class Tree {
             }
 
             // two children
-            console.log("Two children");
             if (left && right) {
                 function getNextLargestNode(node, parent) {
                     if (!node.left) {
-                        console.log(node, parent);
                         return { node, parent };
                     } else {
-                        getNextLargestNode(node.left, node);
+                        return getNextLargestNode(node.left, node);
                     }
                 }
                 const nextLargest = getNextLargestNode(root.right, root);
-                console.log(nextLargest);
-                const oldRootCopy = root;
-                root = nextLargest.node;
-                root.left = oldRootCopy.left;
-                if (!parentNode) {
-                    return;
-                } else if (oldRootCopy.data < parentNode.data) {
-                    parentNode.left = root;
+                if (nextLargest.parent === root) {
+                    root.data = nextLargest.node.data;
+                    root.right = nextLargest.node.right;
                 } else {
-                    parentNode.right = root;
+                    nextLargest.parent.left = nextLargest.node.right;
+                    root.data = nextLargest.node.data;
                 }
                 return;
             }
@@ -135,13 +125,6 @@ const unique = test.filter((item, index) => test.indexOf(item) === index);
 unique.sort((a, b) => {
     return a - b;
 });
-console.log(unique);
 
 const example = new Tree(unique);
-prettyPrint(example.root);
-/* example.deleteItem(4);
-prettyPrint(example.root);
-example.deleteItem(67);
-prettyPrint(example.root); */
-example.deleteItem(8);
 prettyPrint(example.root);
