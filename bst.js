@@ -94,12 +94,11 @@ class Tree {
                 }
                 const nextLargest = getNextLargestNode(root.right, root);
                 if (nextLargest.parent === root) {
-                    root.data = nextLargest.node.data;
                     root.right = nextLargest.node.right;
                 } else {
                     nextLargest.parent.left = nextLargest.node.right;
-                    root.data = nextLargest.node.data;
                 }
+                root.data = nextLargest.node.data;
                 return;
             }
         }
