@@ -243,24 +243,40 @@ export class Tree {
         function checkBalance(node) {
             if (node === null) {
                 return 0;
+            }
+            let leftHeight = checkBalance(node.left);
+            let rightHeight = checkBalance(node.right);
+            if (
+                leftHeight === -1 ||
+                rightHeight === -1 ||
+                Math.abs(leftHeight - rightHeight) > 1
+            ) {
+                return -1;
+            }
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+
+        return checkBalance(this.root) > 0;
+    }
+    /* isBalanced() {
+        function checkBalance(node) {
+            if (node === null) {
+                return 0;
+            }
+            const leftHeight = checkBalance(node.left);
+            const rightHeight = checkBalance(node.right);
+            if (
+                leftHeight === -1 ||
+                rightHeight === -1 ||
+                Math.abs(leftHeight - rightHeight > 1)
+            ) {
+                return -1;
             } else {
-                const leftHeight = checkBalance(node.left);
-                if (leftHeight === -1) {
-                    return -1;
-                }
-                const rightHeight = checkBalance(node.right);
-                if (rightHeight === -1) {
-                    return -1;
-                }
-                if (Math.abs(leftHeight - rightHeight > 1)) {
-                    return -1;
-                } else {
-                    return Math.max(leftHeight, rightHeight) + 1;
-                }
+                return Math.max(leftHeight, rightHeight) + 1;
             }
         }
-        return checkBalance(this.root);
-    }
+        return checkBalance(this.root) > 0;
+    } */
 
     rebalance() {
         const values = [];
@@ -295,8 +311,3 @@ export function removeDuplicatesAndSort(array) {
     });
     return unique;
 }
-const raw = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const prepped = removeDuplicatesAndSort(raw);
-
-const example = new Tree(prepped);
-prettyPrint(example.root);
