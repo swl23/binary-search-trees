@@ -238,6 +238,29 @@ class Tree {
             return travel(this.root);
         }
     }
+
+    isBalanced() {
+        function checkBalance(node) {
+            if (node === null) {
+                return 0;
+            } else {
+                const leftHeight = checkBalance(node.left);
+                if (leftHeight === -1) {
+                    return -1;
+                }
+                const rightHeight = checkBalance(node.right);
+                if (rightHeight === -1) {
+                    return -1;
+                }
+                if (Math.abs(leftHeight - rightHeight > 1)) {
+                    return -1;
+                } else {
+                    return Math.max(leftHeight, rightHeight) + 1;
+                }
+            }
+        }
+        return checkBalance(this.root);
+    }
 }
 
 function buildTree(array) {
