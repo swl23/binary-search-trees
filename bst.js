@@ -212,6 +212,32 @@ class Tree {
             return findHeight(targetNode);
         }
     }
+
+    depth(value) {
+        const targetNode = this.find(value);
+        if (!targetNode) {
+            console.log("Value not found.");
+            return null;
+        } else {
+            let depth = 0;
+            function travel(node) {
+                if (node === null) {
+                    return;
+                } else {
+                    if (targetNode.data > node.data) {
+                        depth += 1;
+                        return travel(node.right);
+                    } else if (targetNode.data < node.data) {
+                        depth += 1;
+                        return travel(node.left);
+                    } else {
+                        return depth;
+                    }
+                }
+            }
+            return travel(this.root);
+        }
+    }
 }
 
 function buildTree(array) {
