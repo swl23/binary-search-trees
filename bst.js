@@ -114,18 +114,16 @@ class Tree {
                 console.log("Not found");
                 return;
             } else {
-                this.find(value, root.left);
+                return this.find(value, root.left);
             }
         } else if (value > root.data) {
             if (!root.right) {
                 console.log("Not found");
                 return;
             } else {
-                this.find(value, root.right);
+                return this.find(value, root.right);
             }
         } else {
-            console.log("FOUND");
-            console.log(root);
             return root;
         }
     }
@@ -191,6 +189,28 @@ class Tree {
             }
         }
         visitPost(this.root);
+    }
+
+    height(value) {
+        const targetNode = this.find(value);
+        if (!targetNode) {
+            console.log("Value not found.");
+            return null;
+        } else {
+            function findHeight(node) {
+                if (node === null) {
+                    return -1;
+                } else {
+                    const leftHeight = findHeight(node.left);
+                    const rightHeight = findHeight(node.right);
+                    const bigger =
+                        (leftHeight >= rightHeight ? leftHeight : rightHeight) +
+                        1;
+                    return bigger;
+                }
+            }
+            return findHeight(targetNode);
+        }
     }
 }
 
