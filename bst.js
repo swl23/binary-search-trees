@@ -154,11 +154,44 @@ class Tree {
         trace(this.root);
     }
 
-    inOrder(callback) {}
+    preOrder(callback) {
+        function visitPre(node) {
+            if (!node) {
+                return;
+            } else {
+                callback(node.data);
+                visitPre(node.left);
+                visitPre(node.right);
+            }
+        }
+        visitPre(this.root);
+    }
 
-    preOrder(callback) {}
+    inOrder(callback) {
+        function visitOrd(node) {
+            if (!node) {
+                return;
+            } else {
+                visitOrd(node.left);
+                callback(node.data);
+                visitOrd(node.right);
+            }
+        }
+        visitOrd(this.root);
+    }
 
-    postOrder(callback) {}
+    postOrder(callback) {
+        function visitPost(node) {
+            if (!node) {
+                return;
+            } else {
+                visitPost(node.left);
+                visitPost(node.right);
+                callback(node.data);
+            }
+        }
+        visitPost(this.root);
+    }
 }
 
 function buildTree(array) {
@@ -183,3 +216,15 @@ unique.sort((a, b) => {
 
 const example = new Tree(unique);
 prettyPrint(example.root);
+
+example.preOrder((item) => {
+    console.log(item);
+});
+
+example.inOrder((item) => {
+    console.log(item);
+});
+
+example.postOrder((item) => {
+    console.log(item);
+});
