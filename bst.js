@@ -129,6 +129,30 @@ class Tree {
             return root;
         }
     }
+
+    levelOrder(callback) {
+        function trace(node) {
+            if (node === null) {
+                console.log("No node found.");
+                return;
+            } else {
+                const queue = [];
+                queue.push(node);
+                while (queue.length > 0) {
+                    const current = queue[0];
+                    callback(current);
+                    if (current.left) {
+                        queue.push(current.left);
+                    }
+                    if (current.right) {
+                        queue.push(current.right);
+                    }
+                    queue.shift();
+                }
+            }
+        }
+        trace(this.root);
+    }
 }
 
 function buildTree(array) {
