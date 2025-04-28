@@ -1,4 +1,4 @@
-import { Tree } from "./bst.js";
+import { Tree, removeDuplicatesAndSort } from "./bst.js";
 
 function createRandomArray() {
     const array = [];
@@ -11,7 +11,8 @@ function createRandomArray() {
         const newNumber = Math.floor(Math.random() * 100);
         array.push(newNumber);
     }
-    return array;
+
+    return removeDuplicatesAndSort(array);
 }
 
 const test = createRandomArray();

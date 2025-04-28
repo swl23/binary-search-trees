@@ -19,7 +19,7 @@ class Node {
     }
 }
 
-class Tree {
+export class Tree {
     constructor(array) {
         this.root = buildTree(array);
     }
@@ -288,11 +288,15 @@ function buildTree(array) {
     }
 }
 
-const test = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const unique = test.filter((item, index) => test.indexOf(item) === index);
-unique.sort((a, b) => {
-    return a - b;
-});
+export function removeDuplicatesAndSort(array) {
+    const unique = array.filter((item, index) => array.indexOf(item) === index);
+    unique.sort((a, b) => {
+        return a - b;
+    });
+    return unique;
+}
+const raw = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const prepped = removeDuplicatesAndSort(raw);
 
-const example = new Tree(unique);
+const example = new Tree(prepped);
 prettyPrint(example.root);
