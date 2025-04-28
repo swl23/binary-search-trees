@@ -1,4 +1,4 @@
-const prettyPrint = (node, prefix = "", isLeft = true) => {
+export const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {
         return;
     }
@@ -138,7 +138,7 @@ export class Tree {
                 queue.push(node);
                 while (queue.length > 0) {
                     const current = queue[0];
-                    callback(current);
+                    callback(current.data);
                     if (current.left) {
                         queue.push(current.left);
                     }
@@ -162,7 +162,7 @@ export class Tree {
                 visitPre(node.right);
             }
         }
-        visitPre(this.root);
+        return visitPre(this.root);
     }
 
     inOrder(callback) {
@@ -175,7 +175,7 @@ export class Tree {
                 visitOrd(node.right);
             }
         }
-        visitOrd(this.root);
+        return visitOrd(this.root);
     }
 
     postOrder(callback) {
@@ -188,7 +188,7 @@ export class Tree {
                 callback(node.data);
             }
         }
-        visitPost(this.root);
+        return visitPost(this.root);
     }
 
     height(value) {
