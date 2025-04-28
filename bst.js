@@ -261,6 +261,17 @@ class Tree {
         }
         return checkBalance(this.root);
     }
+
+    rebalance() {
+        const values = [];
+        this.levelOrder(function (item) {
+            values.push(item.data);
+        });
+        values.sort((a, b) => {
+            return a - b;
+        });
+        this.root = buildTree(values);
+    }
 }
 
 function buildTree(array) {
