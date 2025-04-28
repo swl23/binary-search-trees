@@ -216,15 +216,3 @@ unique.sort((a, b) => {
 
 const example = new Tree(unique);
 prettyPrint(example.root);
-
-example.preOrder((item) => {
-    console.log(item);
-});
-
-example.inOrder((item) => {
-    console.log(item);
-});
-
-example.postOrder((item) => {
-    console.log(item);
-});
