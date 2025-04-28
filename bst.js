@@ -153,6 +153,12 @@ class Tree {
         }
         trace(this.root);
     }
+
+    inOrder(callback) {}
+
+    preOrder(callback) {}
+
+    postOrder(callback) {}
 }
 
 function buildTree(array) {
