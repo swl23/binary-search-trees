@@ -258,30 +258,11 @@ export class Tree {
 
         return checkBalance(this.root) > 0;
     }
-    /* isBalanced() {
-        function checkBalance(node) {
-            if (node === null) {
-                return 0;
-            }
-            const leftHeight = checkBalance(node.left);
-            const rightHeight = checkBalance(node.right);
-            if (
-                leftHeight === -1 ||
-                rightHeight === -1 ||
-                Math.abs(leftHeight - rightHeight > 1)
-            ) {
-                return -1;
-            } else {
-                return Math.max(leftHeight, rightHeight) + 1;
-            }
-        }
-        return checkBalance(this.root) > 0;
-    } */
 
     rebalance() {
         const values = [];
         this.levelOrder(function (item) {
-            values.push(item.data);
+            values.push(item);
         });
         values.sort((a, b) => {
             return a - b;
@@ -290,7 +271,7 @@ export class Tree {
     }
 }
 
-function buildTree(array) {
+export function buildTree(array) {
     const startIndex = 0;
     const endIndex = array.length - 1;
     const midIndex = Math.floor((endIndex - startIndex) / 2);
